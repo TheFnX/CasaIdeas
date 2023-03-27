@@ -6,11 +6,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.HomePage;
 
 public abstract class BaseTest {
     protected WebDriver webDriver;
     private String browser ="chrome";
-    private String url = "https://www.google.com/";
+    private String url = "https://www.casaideas.com.bo/";
+
 
     @BeforeMethod
     public void setUp() throws Exception {

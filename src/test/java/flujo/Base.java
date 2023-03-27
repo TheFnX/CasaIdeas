@@ -24,8 +24,8 @@ public class Base {
         Thread.sleep(4000);
         selectCity();
         Thread.sleep(4000);
-        closeAd();
-        Thread.sleep(4000);
+//        clickOnLoginButton();
+//        Thread.sleep(4000);
         searchOnPage();
         Thread.sleep(4000);
         selectProduct();
@@ -38,9 +38,13 @@ public class Base {
         Thread.sleep(4000);
         Login();
         Thread.sleep(4000);
-        continuePurchase();
+        continueButton();
         Thread.sleep(4000);
         personalDatesForm();
+        Thread.sleep(4000);
+        deliveryForm();
+        Thread.sleep(4000);
+        selectPageForm();
         Thread.sleep(4000);
 
     }
@@ -54,6 +58,11 @@ public class Base {
         WebElement adButton = webDriver.findElement(By.xpath("//button[normalize-space()='CERRAR']"));
         adButton.click();
     }
+
+//    public void clickOnLoginButton(){
+//        WebElement cityButton = webDriver.findElement(By.xpath("//span//img[@alt='ci']"));
+//        cityButton.click();
+//    }
 
     public void searchOnPage(){
         WebElement inputSearcher = webDriver.findElement(By.xpath("//input[@id='search_input_web']"));
@@ -102,10 +111,17 @@ public class Base {
         inputEmail.sendKeys("lord.rocinante@gmail.com");
         WebElement inputPassword = webDriver.findElement(By.xpath("//input[@name='password']"));
         inputPassword.sendKeys("mzDm9ZbDNZ2Rcbx");
+        Thread.sleep(1000);
         WebElement continueCartButton = webDriver.findElement(By.xpath("//button[normalize-space()='Iniciar sesión']"));
+        continueCartButton.click();
+        Thread.sleep(4000);
+    }
+    public void continueButton() throws InterruptedException {
+        WebElement continueCartButton = webDriver.findElement(By.xpath("//button[@class='btn btn-primary pagebuilder-column-1']"));
         continueCartButton.click();
         Thread.sleep(1000);
     }
+
 
     public void personalDatesForm() throws InterruptedException {
         Select documentType = new Select(webDriver.findElement(By.id("formtipodoc")));
@@ -113,9 +129,11 @@ public class Base {
         Thread.sleep(1000);
 
         WebElement inputIdDocument = webDriver.findElement(By.id("forminvoicenumber"));
+        inputIdDocument.clear();
         inputIdDocument.sendKeys("1358475");
 
         WebElement inputBusinessName = webDriver.findElement(By.id("forminvoicename"));
+        inputBusinessName.clear();
         inputBusinessName.sendKeys("Rocinante");
 
         WebElement nextButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente >']"));
@@ -136,7 +154,7 @@ public class Base {
 //    }
 
     public void deliveryForm() throws InterruptedException {
-        WebElement deliverButton = webDriver.findElement(By.xpath("//button[contains(@name,'1')]"));
+        WebElement deliverButton = webDriver.findElement(By.xpath("//button[@name='1']"));
         deliverButton.click();
         Thread.sleep(1000);
 
@@ -144,18 +162,49 @@ public class Base {
         addDirectionButton.click();
         Thread.sleep(2000);
 
+        WebElement inputAlias = webDriver.findElement(By.id("formalias"));
+        inputAlias.clear();
+        inputAlias.sendKeys("Av Arce");
+
         WebElement inputDirection = webDriver.findElement(By.id("formaddress"));
+        inputDirection.clear();
         inputDirection.sendKeys("Av Arce");
 
         Thread.sleep(1000);
 
-        WebElement inputIdDocument = webDriver.findElement(By.id("forminvoicenumber"));
-        inputIdDocument.sendKeys("1358475");
+        WebElement inputIReference = webDriver.findElement(By.id("formreference"));
+        inputIReference.clear();
+        inputIReference.sendKeys("Referencia de prueba");
 
-        WebElement inputBusinessName = webDriver.findElement(By.id("forminvoicename"));
-        inputBusinessName.sendKeys("Rocinante");
+        WebElement nextAddDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente']"));
+        nextAddDirectionButton.click();
 
+        WebElement confirmDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Confirmar']"));
+        nextAddDirectionButton.click();
 
+        WebElement inputInstructions = webDriver.findElement(By.id("form_2_additionalShippingInstructions"));
+        inputIReference.sendKeys("prueba prueba");
+
+        WebElement acceptTermsCheckbox = webDriver.findElement(By.id("checkterms_YES"));
+        nextAddDirectionButton.click();
+
+        WebElement nextButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente >']"));
+        nextButton.click();
+        Thread.sleep(3000);
+    }
+
+        public void selectPageForm() throws InterruptedException {
+//        WebElement paymentOnlineButton = webDriver.findElement(By.xpath("//label[normalize-space()='Pago online']"));
+//        paymentOnlineButton.click();
+//        Thread.sleep(3000);
+
+        WebElement paymentAtDeliveryButton = webDriver.findElement(By.xpath("//label[normalize-space()='Pago al momento de Entrega']"));
+        paymentAtDeliveryButton.click();
+        Thread.sleep(3000);
+
+        WebElement finishOrderButton = webDriver.findElement(By.xpath("//button[normalize-space()='Finalizar Pedido']"));
+        finishOrderButton.click();
+        Thread.sleep(3000);
     }
 
     public static void main(String arg[]) throws InterruptedException, AWTException {
