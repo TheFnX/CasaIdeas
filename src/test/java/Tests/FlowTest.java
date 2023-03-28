@@ -5,10 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
+import java.util.concurrent.TimeUnit;
+
 public class FlowTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         HomePage homePage = new HomePage(webDriver);
         homePage.clickOnCity();
         SearchResultPage searchResultPage = homePage.SearchOnPage("cocina");
@@ -23,5 +26,6 @@ public class FlowTest extends BaseTest {
         deliveryDataPage.deliveryOption();
         PaymentPage paymentPage = deliveryDataPage.deliveryDatesForm("Oficina", "Av Juan Pablo II", "Referencia de prueba" );
         OrderDataPage orderDataPage = paymentPage.paymentAtDelivery();
+        Assert.assertTrue(orderDataPage.resultsDisplayed());
     }
 }

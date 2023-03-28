@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Base {
 
@@ -21,15 +22,15 @@ public class Base {
         webDriver = new ChromeDriver(options);
         webDriver.get("https://www.casaideas.com.bo/");
         webDriver.manage().window().maximize();
-        Thread.sleep(4000);
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         selectCity();
-        Thread.sleep(4000);
 //        clickOnLoginButton();
 //        Thread.sleep(4000);
+        Thread.sleep(4000);
         searchOnPage();
         Thread.sleep(4000);
         selectProduct();
-        Thread.sleep(8000);
+        Thread.sleep(4000);
         addedProduct();
         Thread.sleep(4000);
         completePurchase();
@@ -37,16 +38,14 @@ public class Base {
         continuePurchase();
         Thread.sleep(4000);
         Login();
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         continueButton();
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         personalDatesForm();
         Thread.sleep(4000);
         deliveryForm();
         Thread.sleep(4000);
         selectPageForm();
-        Thread.sleep(4000);
-
     }
 
     public void selectCity(){
@@ -65,13 +64,14 @@ public class Base {
 //    }
 
     public void searchOnPage(){
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         WebElement inputSearcher = webDriver.findElement(By.xpath("//input[@id='search_input_web']"));
         inputSearcher.sendKeys("cocina");
         inputSearcher.sendKeys(Keys.ENTER);
     }
 
     public void selectProduct(){
-        WebElement selectProduct = webDriver.findElement(By.xpath("//div[@class='profile-widget'][1]"));
+        WebElement selectProduct = webDriver.findElement(By.className("product-image"));
         selectProduct.click();
     }
 //
@@ -84,26 +84,26 @@ public class Base {
 
         WebElement productsIncreaseButton = webDriver.findElement(By.xpath("//button[@class='qty-up']"));
         productsIncreaseButton.click();
-        Thread.sleep(1000);
 
         WebElement addToCartButton = webDriver.findElement(By.xpath("//button[contains(text(),'AGREGAR AL CARRO')]"));
         addToCartButton.click();
-        Thread.sleep(2000);
     }
 
     public void completePurchase() throws InterruptedException {
+        Thread.sleep(4000);
+
         WebElement openCartButton = webDriver.findElement(By.xpath("//button[@class='no-button mini-cart-icon']//img[@alt='Shop Cart']"));
         openCartButton.click();
-        Thread.sleep(1000);
+        Thread.sleep(4000);
 
         WebElement completePurchaseButton = webDriver.findElement(By.cssSelector("div[class='showCart-active'] button[class='btn btn-sm btn-primary mr-2']"));
         completePurchaseButton.click();
     }
 
     public void continuePurchase() throws InterruptedException {
+        Thread.sleep(4000);
         WebElement continueCartButton = webDriver.findElement(By.xpath("//button[@class='btn btn-primary pagebuilder-column-1']"));
         continueCartButton.click();
-        Thread.sleep(1000);
     }
 
     public void Login() throws InterruptedException {
@@ -111,22 +111,21 @@ public class Base {
         inputEmail.sendKeys("lord.rocinante@gmail.com");
         WebElement inputPassword = webDriver.findElement(By.xpath("//input[@name='password']"));
         inputPassword.sendKeys("mzDm9ZbDNZ2Rcbx");
-        Thread.sleep(1000);
+
         WebElement continueCartButton = webDriver.findElement(By.xpath("//button[normalize-space()='Iniciar sesión']"));
+        continueCartButton.click();
+    }
+    public void continueButton() throws InterruptedException {
+        Thread.sleep(4000);
+        WebElement continueCartButton = webDriver.findElement(By.xpath("//button[@class='btn btn-primary pagebuilder-column-1']"));
         continueCartButton.click();
         Thread.sleep(4000);
     }
-    public void continueButton() throws InterruptedException {
-        WebElement continueCartButton = webDriver.findElement(By.xpath("//button[@class='btn btn-primary pagebuilder-column-1']"));
-        continueCartButton.click();
-        Thread.sleep(1000);
-    }
-
 
     public void personalDatesForm() throws InterruptedException {
         Select documentType = new Select(webDriver.findElement(By.id("formtipodoc")));
         documentType.selectByVisibleText("Cédula de Identidad");
-        Thread.sleep(1000);
+
 
         WebElement inputIdDocument = webDriver.findElement(By.id("forminvoicenumber"));
         inputIdDocument.clear();
@@ -138,7 +137,7 @@ public class Base {
 
         WebElement nextButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente >']"));
         nextButton.click();
-        Thread.sleep(3000);
+
     }
 
 //    public void pickUpInStoreForm() throws InterruptedException {
@@ -156,41 +155,40 @@ public class Base {
     public void deliveryForm() throws InterruptedException {
         WebElement deliverButton = webDriver.findElement(By.xpath("//button[@name='1']"));
         deliverButton.click();
-        Thread.sleep(1000);
 
-        WebElement addDirectionButton = webDriver.findElement(By.xpath("//span[normalize-space()='Agregar']"));
-        addDirectionButton.click();
-        Thread.sleep(2000);
+//        WebElement addDirectionButton = webDriver.findElement(By.xpath("//span[normalize-space()='Agregar']"));
+//        addDirectionButton.click();
+//
+//        WebElement inputAlias = webDriver.findElement(By.id("formalias"));
+//        inputAlias.clear();
+//        inputAlias.sendKeys("Av Arce");
+//
+//        WebElement inputDirection = webDriver.findElement(By.id("formaddress"));
+//        inputDirection.clear();
+//        inputDirection.sendKeys("Av Arce");
+//
+//        WebElement inputIReference = webDriver.findElement(By.id("formreference"));
+//        inputIReference.clear();
+//        inputIReference.sendKeys("Referencia de prueba");
+//
+//        WebElement nextAddDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente']"));
+//        nextAddDirectionButton.click();
+//
+//        WebElement confirmDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Confirmar']"));
+//        confirmDirectionButton.click();
 
-        WebElement inputAlias = webDriver.findElement(By.id("formalias"));
-        inputAlias.clear();
-        inputAlias.sendKeys("Av Arce");
-
-        WebElement inputDirection = webDriver.findElement(By.id("formaddress"));
-        inputDirection.clear();
-        inputDirection.sendKeys("Av Arce");
-
-        Thread.sleep(1000);
-
-        WebElement inputIReference = webDriver.findElement(By.id("formreference"));
-        inputIReference.clear();
-        inputIReference.sendKeys("Referencia de prueba");
-
-        WebElement nextAddDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente']"));
-        nextAddDirectionButton.click();
-
-        WebElement confirmDirectionButton = webDriver.findElement(By.xpath("//button[normalize-space()='Confirmar']"));
-        nextAddDirectionButton.click();
+        WebElement selectDirectionButton = webDriver.findElement(By.xpath("//button[@value='1725']"));
+        selectDirectionButton.click();
 
         WebElement inputInstructions = webDriver.findElement(By.id("form_2_additionalShippingInstructions"));
-        inputIReference.sendKeys("prueba prueba");
+        inputInstructions.clear();
+        inputInstructions.sendKeys("prueba prueba");
 
         WebElement acceptTermsCheckbox = webDriver.findElement(By.id("checkterms_YES"));
-        nextAddDirectionButton.click();
+        acceptTermsCheckbox.click();
 
         WebElement nextButton = webDriver.findElement(By.xpath("//button[normalize-space()='Siguiente >']"));
         nextButton.click();
-        Thread.sleep(3000);
     }
 
         public void selectPageForm() throws InterruptedException {
@@ -200,12 +198,13 @@ public class Base {
 
         WebElement paymentAtDeliveryButton = webDriver.findElement(By.xpath("//label[normalize-space()='Pago al momento de Entrega']"));
         paymentAtDeliveryButton.click();
-        Thread.sleep(3000);
+            Thread.sleep(4000);
 
         WebElement finishOrderButton = webDriver.findElement(By.xpath("//button[normalize-space()='Finalizar Pedido']"));
         finishOrderButton.click();
-        Thread.sleep(3000);
-    }
+            Thread.sleep(4000);
+
+        }
 
     public static void main(String arg[]) throws InterruptedException, AWTException {
         Base base = new Base();

@@ -35,35 +35,29 @@ public class DeliveryDataPage extends BasePage{
     }
 
     public DeliveryDataPage personalDatesForm(String document, String documentNumber, String businessName) throws InterruptedException {
-        selectByVisibleText(document, selectDocumentType);
-        Thread.sleep(1000);
+        selectByVisibleText(document, selectDocumentType);webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         typeBox(documentNumber, inputIdDocument);
-        Thread.sleep(1000);
         typeBox(businessName, inputBusinessName);
-        Thread.sleep(1000);
         webDriver.findElement(nextButton).click();
         return new DeliveryDataPage(webDriver);
     }
 
     public DeliveryDataPage deliveryOption() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(regularDeliveryButton).click();
         return new DeliveryDataPage(webDriver);
     }
 
     public PaymentPage deliveryDatesForm(String alias, String direction, String reference) throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(addDirectionButton).click();
-        Thread.sleep(1000);
         typeBox(alias, inputAddressAliases);
         typeBox(direction, inputDirection);
         typeBox(reference, inputReferenceDirection);
         webDriver.findElement(nextAddDirectionButton).click();
-        Thread.sleep(3000);
         webDriver.findElement(confirmDirectionButton).click();
-        Thread.sleep(5000);
         webDriver.findElement(acceptTermsCheckbox).click();
-        Thread.sleep(1000);
         webDriver.findElement(nextButton).click();
-        Thread.sleep(5000);
         return new PaymentPage(webDriver);
     }
 

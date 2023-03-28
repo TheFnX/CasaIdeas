@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,20 +20,18 @@ public class DetailProductPage extends BasePage{
     }
 
     public DetailProductPage increaseProducts() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(productsIncreaseButton).click();
-        Thread.sleep(2000);
         return new DetailProductPage(webDriver);
     }
     public DetailProductPage addProducts() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(addToCartButton).click();
-        Thread.sleep(2000);
         return new DetailProductPage(webDriver);
     }
     public CompletePurchasePage continuePurchase() throws InterruptedException {
         webDriver.findElement(openCartButton).click();
-        Thread.sleep(1000);
         webDriver.findElement(completePurchaseButton).click();
-        Thread.sleep(2000);
         return new CompletePurchasePage(webDriver);
     }
 

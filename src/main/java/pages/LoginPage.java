@@ -20,17 +20,15 @@ public class LoginPage extends BasePage {
     }
 
     public HomePage loginOnPage(String email, String pass) throws InterruptedException {
-        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         typeBox(email, inputEmail);
-        Thread.sleep(1000);
         typeBox(pass, inputPassword);
-        Thread.sleep(5000);
         webDriver.findElement(buttonLogin).click();
         return new HomePage(webDriver);
     }
     public boolean isErrorMessageVisible(){
         try {
-            WebDriverWait wait = new WebDriverWait(webDriver, 3);
+            WebDriverWait wait = new WebDriverWait(webDriver, 5);
             wait.until(ExpectedConditions.visibilityOf(webDriver.findElement(errorMessage)));
             return true;
         }catch (Exception e){

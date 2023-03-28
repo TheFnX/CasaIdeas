@@ -7,10 +7,13 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.ProfilePage;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginTests extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         HomePage homePage = new HomePage(webDriver);
         homePage.clickOnCity();
         LoginPage loginPage = homePage.clickOnLoginButton();
@@ -20,6 +23,7 @@ public class LoginTests extends BaseTest {
     }
     @Test
     public void testInvalidCredentials() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         HomePage homePage = new HomePage(webDriver);
         homePage.clickOnCity();
         LoginPage loginPage = homePage.clickOnLoginButton();

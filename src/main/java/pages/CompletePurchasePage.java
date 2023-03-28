@@ -16,25 +16,22 @@ public class CompletePurchasePage extends BasePage {
     }
 
     public CompletePurchasePage completButton() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(continueCartButton).click();
-        Thread.sleep(2000);
         return new CompletePurchasePage(webDriver);
     }
 
     public CompletePurchasePage logIn(String email, String pass) throws InterruptedException {
         webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         typeBox(email, inputEmail);
-        Thread.sleep(1000);
         typeBox(pass, inputPassword);
-        Thread.sleep(1000);
         webDriver.findElement(buttonLogin).click();
-        Thread.sleep(3000);
         return new CompletePurchasePage(webDriver);
     }
 
     public DeliveryDataPage completPurchase() throws InterruptedException {
+        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         webDriver.findElement(continueCartButton).click();
-        Thread.sleep(2000);
         return new DeliveryDataPage(webDriver);
     }
 
